@@ -15,14 +15,14 @@ public class Block : MonoBehaviour
 
   // references
   private Level level;
-  private GameState gameState;
+  private GameSession gameState;
 
   // Start is called before the first frame update
   void Start()
   {
     hits = 0;
     level = FindObjectOfType<Level>();
-    gameState = FindObjectOfType<GameState>();
+    gameState = FindObjectOfType<GameSession>();
     level.IncrementBlockCount();
   }
 

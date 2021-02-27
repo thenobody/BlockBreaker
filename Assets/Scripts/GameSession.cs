@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameState : MonoBehaviour
+public class GameSession : MonoBehaviour
 {
   // config
   [Range(0.1f, 20.0f)] [SerializeField] float gameSpeed = 1;
@@ -15,7 +15,7 @@ public class GameState : MonoBehaviour
 
   void Awake()
   {
-    int instanceCount = FindObjectsOfType<GameState>().Length;
+    int instanceCount = FindObjectsOfType<GameSession>().Length;
     if (instanceCount > 1)
     {
       gameObject.SetActive(false);
