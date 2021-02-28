@@ -9,6 +9,7 @@ public class Block : MonoBehaviour
   [SerializeField] private int maxHits;
   [SerializeField] private float velocityMultiplier;
   [SerializeField] private AudioClip destroyAudioClip;
+  [SerializeField] private GameObject blockSparklesVFX;
 
   // state
   private int hits;
@@ -21,31 +22,48 @@ public class Block : MonoBehaviour
   void Start()
   {
     hits = 0;
-    level = FindObjectOfType<Level>();
     gameState = FindObjectOfType<GameSession>();
-    level.IncrementBlockCount();
+    CountBreakableBlocks();
+  }
+
+  private void CountBreakableBlocks()
+  {
+    level = FindObjectOfType<Level>();
+    if (gameObject.tag == "Breakable")
+    {
+      level.IncrementBlockCount();
+    }
   }
 
   private void OnCollisionEnter2D(Collision2D collision)
   {
     hits++;
-    collision.gameObject.GetComponent<Ball>().IncreaseVelocity(velocityMultiplier);
-    if (hits >= maxHits)
+    if (gameObject.tag == "Breakable")
     {
-      DestroyBlock();
-    }
-    else
-    {
-      Color currentColor = GetComponent<SpriteRenderer>().color;
-      GetComponent<SpriteRenderer>().color = Color.Lerp(currentColor, Color.black, 0.5f);
+      collision.gameObject.GetComponent<Ball>().IncreaseVelocity(velocityMultiplier);
+      if (hits >= maxHits)
+      {
+        DestroyBlock();
+      }
+      else
+      {
+        Color currentColor = GetComponent<SpriteRenderer>().color;
+        GetComponent<SpriteRenderer>().color = Color.Lerp(currentColor, Color.black, 0.5f);
+      }
     }
   }
 
   private void DestroyBlock()
   {
     AudioSource.PlayClipAtPoint(destroyAudioClip, Camera.main.transform.position);
+    TriggerSparklesVFS();
     Destroy(gameObject);
     level.DecrementBlockCount();
     gameState.AddBlockDestroyedPoints();
+  }
+
+  private void TriggerSparklesVFS()
+  {
+    Instantiate(blockSparklesVFX, gameObject.transform.position, gameObject.transform.rotation);
   }
 }
