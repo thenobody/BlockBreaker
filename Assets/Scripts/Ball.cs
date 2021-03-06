@@ -8,6 +8,7 @@ public class Ball : MonoBehaviour
   // config parameters
   [SerializeField] Paddle paddle;
   [SerializeField] Vector2 initialVelocity;
+  [Range(0f, 10f)] [SerializeField] private float velocityRandomness;
   [SerializeField] AudioClip[] audioClips;
   // state
   private Rigidbody2D ballRigidbody;
@@ -51,6 +52,7 @@ public class Ball : MonoBehaviour
   {
     var clip = GetRandomAudioClip();
     ballAudioSource.PlayOneShot(GetRandomAudioClip());
+    IncreaseVelocity();
   }
 
   private AudioClip GetRandomAudioClip()
@@ -59,10 +61,9 @@ public class Ball : MonoBehaviour
     return audioClips[index];
   }
 
-  public void IncreaseVelocity(float factor)
+  public void IncreaseVelocity()
   {
-    ballRigidbody.velocity *= factor;
+    Vector2 randomVector = new Vector2(Random.Range(0f, velocityRandomness), Random.Range(0f, velocityRandomness));
+    ballRigidbody.velocity += randomVector;
   }
-
-  // Update is called once per frame
 }

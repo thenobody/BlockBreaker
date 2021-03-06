@@ -136,6 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   paddle: {fileID: 0}
   initialVelocity: {x: 2, y: 10}
+  velocityRandomness: 0
   audioClips:
   - {fileID: 8300000, guid: 67ea82ee0d61647e68e555b6ae830fab, type: 3}
   - {fileID: 8300000, guid: 32aac78b899b44b97846d2019729eb20, type: 3}

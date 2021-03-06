@@ -28362,6 +28362,11 @@ PrefabInstance:
       objectReference: {fileID: 1173869797}
     - target: {fileID: 4389110213843646322, guid: 619886b4e13f64325aced2051cbc5d8e,
         type: 3}
+      propertyPath: velocityRandomness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4389110213843646322, guid: 619886b4e13f64325aced2051cbc5d8e,
+        type: 3}
       propertyPath: audioClips.Array.size
       value: 4
       objectReference: {fileID: 0}

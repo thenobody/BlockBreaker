@@ -125,3 +125,4 @@ MonoBehaviour:
   velocityMultiplier: 1
   destroyAudioClip: {fileID: 8300000, guid: 9f3ef89a0b8704176b5377990217735b, type: 3}
   blockSparklesVFX: {fileID: 100000, guid: 7d846c02296ef4dc4abff04ce3e5262c, type: 3}
+  hitSprites: []

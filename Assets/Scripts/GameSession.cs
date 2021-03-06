@@ -9,6 +9,8 @@ public class GameSession : MonoBehaviour
   [SerializeField] TMPro.TMP_Text scoreText;
   [SerializeField] int blockDestroyedPoints = 83;
 
+  [SerializeField] bool autoPlay = false;
+
   //state
   int score = 0;
   // Update is called once per frame
@@ -41,5 +43,10 @@ public class GameSession : MonoBehaviour
   public void ResetGame()
   {
     Destroy(gameObject);
+  }
+
+  public bool IsAutoPlayEnabled()
+  {
+    return autoPlay;
   }
 }

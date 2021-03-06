@@ -7,9 +7,9 @@ public class Block : MonoBehaviour
 
   // config
   [SerializeField] private int maxHits;
-  [SerializeField] private float velocityMultiplier;
   [SerializeField] private AudioClip destroyAudioClip;
   [SerializeField] private GameObject blockSparklesVFX;
+  [SerializeField] private Sprite[] hitSprites;
 
   // state
   private int hits;
@@ -37,20 +37,28 @@ public class Block : MonoBehaviour
 
   private void OnCollisionEnter2D(Collision2D collision)
   {
-    hits++;
     if (gameObject.tag == "Breakable")
     {
-      collision.gameObject.GetComponent<Ball>().IncreaseVelocity(velocityMultiplier);
-      if (hits >= maxHits)
-      {
-        DestroyBlock();
-      }
-      else
-      {
-        Color currentColor = GetComponent<SpriteRenderer>().color;
-        GetComponent<SpriteRenderer>().color = Color.Lerp(currentColor, Color.black, 0.5f);
-      }
+      HandleHit(collision);
     }
+  }
+
+  private void HandleHit(Collision2D collision)
+  {
+    hits++;
+    if (hits >= maxHits)
+    {
+      DestroyBlock();
+    }
+    else
+    {
+      ShowNextHitSprite();
+    }
+  }
+
+  private void ShowNextHitSprite()
+  {
+    GetComponent<SpriteRenderer>().sprite = hitSprites[hits - 1];
   }
 
   private void DestroyBlock()
@@ -64,6 +72,7 @@ public class Block : MonoBehaviour
 
   private void TriggerSparklesVFS()
   {
-    Instantiate(blockSparklesVFX, gameObject.transform.position, gameObject.transform.rotation);
+    var sparkles = Instantiate(blockSparklesVFX, gameObject.transform.position, gameObject.transform.rotation);
+    Destroy(sparkles, 1f);
   }
 }

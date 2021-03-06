@@ -5,21 +5,32 @@ using UnityEngine.SceneManagement;
 
 public class Paddle : MonoBehaviour
 {
-  // Start is called before the first frame update
+  // references
+  private GameSession gameSession;
+  private Camera currentCamera;
+  private Ball ball;
+
   void Start()
   {
-
+    gameSession = FindObjectOfType<GameSession>();
+    currentCamera = Camera.main;
+    ball = FindObjectOfType<Ball>();
   }
 
   // Update is called once per frame
   void Update()
   {
-    Camera camera = Camera.main;
-    Vector2 position = camera.ScreenToWorldPoint(Input.mousePosition);
-    float maxWidth = camera.orthographicSize * camera.aspect * 2;
-    float xNextPosition = Mathf.Clamp(position.x, 1, maxWidth - 1);
+    float xNextPosition = GetXPosition();
     float yNextPosition = transform.position.y;
 
     transform.position = new Vector2(xNextPosition, yNextPosition);
+  }
+
+  public float GetXPosition()
+  {
+    float maxWidth = currentCamera.orthographicSize * currentCamera.aspect * 2;
+
+    float xPosition = gameSession.IsAutoPlayEnabled() ? ball.transform.position.x : currentCamera.ScreenToWorldPoint(Input.mousePosition).x;
+    return Mathf.Clamp(xPosition, 1, maxWidth - 1);
   }
 }

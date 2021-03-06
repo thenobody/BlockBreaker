@@ -121,7 +121,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78148c32451a64491810943f5cbe00d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHits: 1
-  velocityMultiplier: 1
+  maxHits: 3
   destroyAudioClip: {fileID: 8300000, guid: 9f3ef89a0b8704176b5377990217735b, type: 3}
   blockSparklesVFX: {fileID: 100000, guid: 7d846c02296ef4dc4abff04ce3e5262c, type: 3}
+  hitSprites:
+  - {fileID: 21300000, guid: f8929672beb894017966891b5bdfc063, type: 3}
+  - {fileID: 21300000, guid: 8203fe000c2404b678443e168d0d5202, type: 3}
